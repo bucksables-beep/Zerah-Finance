@@ -125,63 +125,62 @@ const WalletsView: React.FC<WalletsViewProps> = ({ wallets, transactions, onAddF
 
       {/* Add Funds Modal */}
       {addFundsWallet && (
-        <div className="fixed inset-0 z-[100] bg-[#000000] flex flex-col p-6 animate-fadeIn justify-center">
-          <div className="w-full max-w-sm mx-auto bg-[#121212] p-8 rounded-[3rem] border border-[#B7CC16]/30 space-y-8 shadow-2xl">
-            <div className="text-center space-y-2">
+        <div className="fixed inset-0 z-[100] bg-black/95 flex flex-col items-center justify-center p-6 animate-fadeIn backdrop-blur-md">
+          <div className="w-full max-w-sm bg-[#121212] rounded-[3rem] border border-[#B7CC16]/30 p-8 space-y-8 shadow-[0_0_50px_rgba(183,204,22,0.15)]">
+            <div className="text-center space-y-3">
               <div className="w-20 h-20 bg-[#B7CC16]/10 border border-[#B7CC16]/30 rounded-[2rem] flex items-center justify-center mx-auto mb-6 transform rotate-3">
                 <svg className="w-10 h-10 text-[#B7CC16]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
               </div>
-              <h3 className="text-[10px] text-[#B7CC16] font-black uppercase tracking-[0.4em]">Wallet Top-up</h3>
+              <h3 className="text-[10px] text-[#B7CC16] font-black uppercase tracking-[0.4em]">Asset Infusion</h3>
               <p className="text-3xl font-black text-white tracking-tighter uppercase">{addFundsWallet.currency} Wallet</p>
+              <p className="text-[10px] text-white/30 uppercase tracking-widest">Global Direct Deposit</p>
             </div>
 
             <div className="space-y-4">
-              <div className="space-y-2">
-                <label className="text-[10px] uppercase font-black text-[#B7CC16] tracking-widest ml-1">Enter Amount</label>
-                <div className="bg-black/40 border border-white/5 rounded-2xl px-6 py-5 flex items-center justify-between">
-                  <span className="text-2xl font-black text-white/30">{addFundsWallet.symbol}</span>
-                  <input 
-                    type="number" 
-                    value={topUpAmount}
-                    onChange={(e) => setTopUpAmount(e.target.value)}
-                    placeholder="0.00"
-                    className="bg-transparent text-3xl font-black text-right outline-none flex-1 text-white placeholder-white/5"
-                  />
-                </div>
+              <div className="bg-black/40 border border-[#B7CC16]/10 rounded-[2rem] px-6 py-6 flex items-center gap-3 overflow-hidden">
+                <span className="text-3xl font-black text-[#B7CC16] shrink-0">{addFundsWallet.symbol}</span>
+                <input 
+                  type="number" 
+                  value={topUpAmount}
+                  onChange={(e) => setTopUpAmount(e.target.value)}
+                  placeholder="0.00"
+                  className="bg-transparent text-4xl font-black text-right outline-none flex-1 text-white placeholder-white/5 min-w-0"
+                  autoFocus
+                />
               </div>
 
-              <div className="p-4 bg-white/5 rounded-2xl space-y-2">
-                <div className="flex justify-between text-[10px] font-black uppercase tracking-tighter">
-                  <span className="text-white/40">Fee</span>
-                  <span className="text-[#B7CC16]">FREE</span>
+              <div className="p-5 bg-white/5 rounded-2xl space-y-3 border border-white/5">
+                <div className="flex justify-between text-[10px] font-black uppercase tracking-[0.2em]">
+                  <span className="text-white/40">Transmission Fee</span>
+                  <span className="text-[#B7CC16]">WAIVED (FREE)</span>
                 </div>
-                <div className="flex justify-between text-[10px] font-black uppercase tracking-tighter">
-                  <span className="text-white/40">Method</span>
-                  <span className="text-white">Zerah Direct Deposit</span>
+                <div className="flex justify-between text-[10px] font-black uppercase tracking-[0.2em]">
+                  <span className="text-white/40">Protocol</span>
+                  <span className="text-white">Zerah Direct Node</span>
                 </div>
               </div>
             </div>
 
-            <div className="space-y-3">
+            <div className="space-y-3 pt-4">
               <button 
                 onClick={handleTopUp}
                 disabled={!topUpAmount || isTopUpLoading}
-                className="w-full bg-[#B7CC16] disabled:opacity-30 text-black font-black py-5 rounded-[2rem] text-xl neon-glow transition-all active:scale-95 flex items-center justify-center gap-3"
+                className="w-full bg-[#B7CC16] disabled:opacity-20 text-black font-black py-5 rounded-[2rem] text-xl neon-glow transition-all active:scale-95 flex items-center justify-center gap-3"
               >
                 {isTopUpLoading ? (
                   <>
                     <div className="w-5 h-5 border-4 border-black/20 border-t-black rounded-full animate-spin"></div>
-                    <span>Processing...</span>
+                    <span>Settling Ledger...</span>
                   </>
                 ) : (
-                  'Deposit Now'
+                  'Authorize Deposit'
                 )}
               </button>
               <button 
                 onClick={() => setAddFundsWallet(null)}
                 className="w-full bg-transparent text-white/30 py-4 font-black uppercase tracking-widest text-[10px]"
               >
-                Cancel
+                Abort
               </button>
             </div>
           </div>

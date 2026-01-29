@@ -64,7 +64,6 @@ const TransferView: React.FC<TransferViewProps> = ({ wallets, onTransfer }) => {
 
         {/* The Receipt Card */}
         <div className="w-full max-w-sm bg-[#121212] rounded-[2.5rem] border border-[#B7CC16]/30 overflow-hidden shadow-2xl relative">
-          {/* Decorative punch holes for receipt look */}
           <div className="absolute top-1/2 -left-3 w-6 h-6 bg-[#000000] rounded-full -translate-y-1/2 border-r border-[#B7CC16]/20"></div>
           <div className="absolute top-1/2 -right-3 w-6 h-6 bg-[#000000] rounded-full -translate-y-1/2 border-l border-[#B7CC16]/20"></div>
           
@@ -74,7 +73,7 @@ const TransferView: React.FC<TransferViewProps> = ({ wallets, onTransfer }) => {
                 <svg className="w-8 h-8 text-[#B7CC16]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
               </div>
               <h3 className="text-[10px] text-[#B7CC16] font-black uppercase tracking-[0.3em]">Transaction Receipt</h3>
-              <p className="text-4xl font-black tracking-tighter text-white">+{toSymbol}{result}</p>
+              <p className="text-3xl font-black tracking-tighter text-white">+{toSymbol}{result}</p>
               <p className="text-xs text-white/40">{new Date().toLocaleString()}</p>
             </div>
 
@@ -119,14 +118,14 @@ const TransferView: React.FC<TransferViewProps> = ({ wallets, onTransfer }) => {
       <h2 className="text-3xl font-black neon-text uppercase tracking-tighter">Exchange</h2>
 
       <div className="space-y-6">
-        <div className="bg-[#121212] rounded-[2rem] p-8 border border-[#B7CC16]/20 space-y-6 relative shadow-2xl">
+        <div className="bg-[#121212] rounded-[2.5rem] p-8 border border-[#B7CC16]/20 space-y-6 relative shadow-2xl">
           <div className="space-y-3">
             <div className="flex justify-between items-center">
               <label className="text-[10px] text-[#B7CC16] font-black uppercase tracking-[0.2em]">Source Wallet</label>
               <span className="text-[10px] text-white/40">Balance: {fromSymbol}{wallets.find(w => w.currency === fromCurrency)?.balance.toLocaleString()}</span>
             </div>
-            <div className="flex items-center justify-between gap-4">
-              <div className="bg-[#1E1E1E] px-4 py-2 rounded-xl border border-white/5 flex items-center gap-2">
+            <div className="flex items-center justify-between gap-4 overflow-hidden">
+              <div className="shrink-0 bg-[#1E1E1E] px-4 py-2 rounded-xl border border-white/5 flex items-center gap-2">
                 <select 
                   value={fromCurrency} 
                   onChange={(e) => setFromCurrency(e.target.value as Currency)}
@@ -141,19 +140,19 @@ const TransferView: React.FC<TransferViewProps> = ({ wallets, onTransfer }) => {
                 placeholder="0.00"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                className="bg-transparent text-4xl font-black text-right outline-none w-1/2 text-white placeholder-white/10"
+                className="bg-transparent text-3xl font-black text-right outline-none flex-1 text-white placeholder-white/10 min-w-0"
               />
             </div>
           </div>
 
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-[#B7CC16] rounded-full border-[6px] border-[#121212] flex items-center justify-center text-[#000000] z-10 shadow-[0_0_15px_rgba(183,204,22,0.6)] animate-pulse">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" /></svg>
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 bg-[#B7CC16] rounded-full border-[6px] border-[#121212] flex items-center justify-center text-[#000000] z-10 shadow-[0_0_15px_rgba(183,204,22,0.6)] animate-pulse">
+            <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" /></svg>
           </div>
 
-          <div className="pt-8 border-t border-white/5 space-y-3">
+          <div className="pt-8 border-t border-white/10 space-y-3">
             <label className="text-[10px] text-[#B7CC16] font-black uppercase tracking-[0.2em]">Target Wallet</label>
-            <div className="flex items-center justify-between gap-4">
-              <div className="bg-[#1E1E1E] px-4 py-2 rounded-xl border border-white/5 flex items-center gap-2">
+            <div className="flex items-center justify-between gap-4 overflow-hidden">
+              <div className="shrink-0 bg-[#1E1E1E] px-4 py-2 rounded-xl border border-white/5 flex items-center gap-2">
                 <select 
                   value={toCurrency} 
                   onChange={(e) => setToCurrency(e.target.value as Currency)}
@@ -163,45 +162,45 @@ const TransferView: React.FC<TransferViewProps> = ({ wallets, onTransfer }) => {
                 </select>
                 <svg className="w-4 h-4 text-[#B7CC16]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
               </div>
-              <div className="text-4xl font-black text-white/20 text-right">{result}</div>
+              <div className="text-3xl font-black text-white/20 text-right flex-1 min-w-0 truncate">{result}</div>
             </div>
           </div>
         </div>
 
         {/* Breakdown Section */}
-        <div className={`bg-[#121212]/50 rounded-2xl p-6 border border-white/5 space-y-3 transition-all duration-500 ${numAmount > 0 ? 'opacity-100' : 'opacity-40'}`}>
+        <div className={`bg-[#121212]/50 rounded-3xl p-6 border border-white/5 space-y-3 transition-all duration-500 ${numAmount > 0 ? 'opacity-100' : 'opacity-40'}`}>
           <div className="flex justify-between items-center text-xs">
-            <span className="text-white/40">Zerah Fee (0.5%)</span>
-            <span className="text-[#B7CC16] font-bold">-{fromSymbol}{feeAmount.toFixed(2)}</span>
+            <span className="text-white/40 uppercase font-black tracking-widest">Zerah Fee (0.5%)</span>
+            <span className="text-[#B7CC16] font-black">-{fromSymbol}{feeAmount.toFixed(2)}</span>
           </div>
           <div className="flex justify-between items-center text-xs">
-            <span className="text-white/40">Rate Guaranteed</span>
-            <span className="text-white font-medium">1 {fromCurrency} = {exchangeRate.toFixed(4)} {toCurrency}</span>
+            <span className="text-white/40 uppercase font-black tracking-widest">Rate Locked</span>
+            <span className="text-white font-bold">1 {fromCurrency} = {exchangeRate.toFixed(4)} {toCurrency}</span>
           </div>
-          <div className="pt-2 border-t border-white/5 flex justify-between items-center">
-            <span className="text-xs text-white/60">Total to Receive</span>
-            <span className="text-xl font-black text-[#B7CC16]">{toSymbol}{result}</span>
+          <div className="pt-3 border-t border-white/5 flex justify-between items-center">
+            <span className="text-[10px] text-white/60 font-black uppercase tracking-[0.2em]">Asset Delivery</span>
+            <span className="text-2xl font-black text-[#B7CC16]">{toSymbol}{result}</span>
           </div>
         </div>
 
         <button 
           onClick={handleConfirm}
           disabled={!numAmount || numAmount <= 0 || isProcessing}
-          className="w-full bg-[#B7CC16] disabled:opacity-30 disabled:grayscale text-[#000000] font-black py-5 rounded-2xl text-xl neon-glow shadow-xl active:scale-[0.98] transition-all flex items-center justify-center gap-3 overflow-hidden"
+          className="w-full bg-[#B7CC16] disabled:opacity-20 text-[#000000] font-black py-6 rounded-[2.5rem] text-xl neon-glow shadow-2xl active:scale-[0.98] transition-all flex items-center justify-center gap-3 overflow-hidden"
         >
           {isProcessing ? (
             <>
-              <div className="w-5 h-5 border-4 border-[#000000]/20 border-t-[#000000] rounded-full animate-spin"></div>
-              <span>Processing...</span>
+              <div className="w-6 h-6 border-4 border-[#000000]/20 border-t-[#000000] rounded-full animate-spin"></div>
+              <span>Synchronizing Ledger...</span>
             </>
           ) : (
-            'Exchange Now'
+            'Exchange Assets'
           )}
         </button>
       </div>
 
       <div className="space-y-4 pt-4">
-        <h3 className="text-sm font-black uppercase tracking-widest text-white/40">Recent Recipients</h3>
+        <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-[#B7CC16] ml-1">Recent Nodes</h3>
         <div className="flex gap-5 overflow-x-auto pb-4 scrollbar-hide">
           {[
             { name: 'Sarah', id: 1 },
@@ -210,10 +209,10 @@ const TransferView: React.FC<TransferViewProps> = ({ wallets, onTransfer }) => {
             { name: 'Netflix', id: 4 },
           ].map(person => (
             <div key={person.id} className="flex flex-col items-center gap-3 min-w-[80px]">
-              <div className="w-16 h-16 rounded-2xl bg-[#121212] border border-[#B7CC16]/20 flex items-center justify-center overflow-hidden grayscale hover:grayscale-0 transition-all cursor-pointer hover:border-[#B7CC16]">
+              <div className="w-16 h-16 rounded-2xl bg-[#121212] border border-[#B7CC16]/20 flex items-center justify-center overflow-hidden grayscale hover:grayscale-0 transition-all cursor-pointer hover:border-[#B7CC16] hover:scale-105">
                 <img src={`https://picsum.photos/seed/${person.name}/100/100`} alt={person.name} className="w-full h-full object-cover opacity-60 hover:opacity-100 transition-opacity" />
               </div>
-              <span className="text-[10px] text-white/40 font-black uppercase tracking-tighter text-center truncate w-full">{person.name}</span>
+              <span className="text-[10px] text-white/40 font-black uppercase tracking-widest text-center truncate w-full">{person.name}</span>
             </div>
           ))}
         </div>

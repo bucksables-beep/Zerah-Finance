@@ -196,14 +196,14 @@ const CardsView: React.FC<CardsViewProps> = ({ cards: initialCards }) => {
             </div>
 
             <div className="space-y-4">
-              <div className="bg-black/40 border border-white/5 rounded-2xl px-6 py-5 flex items-center justify-between">
-                <span className="text-2xl font-black text-[#B7CC16]">$</span>
+              <div className="bg-black/40 border border-[#B7CC16]/10 rounded-[2rem] px-6 py-6 flex items-center gap-3">
+                <span className="text-3xl font-black text-[#B7CC16] shrink-0">$</span>
                 <input 
                   type="number" 
                   value={newLimit}
                   onChange={(e) => setNewLimit(e.target.value)}
                   placeholder="0.00"
-                  className="bg-transparent text-3xl font-black text-right outline-none flex-1 text-white placeholder-white/5"
+                  className="bg-transparent text-4xl font-black text-right outline-none w-full text-white placeholder-white/5 min-w-0"
                   autoFocus
                 />
               </div>
