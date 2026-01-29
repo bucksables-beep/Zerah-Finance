@@ -5,9 +5,10 @@ import Logo from './Logo';
 interface HeaderProps {
   isBusinessMode: boolean;
   onToggleAi: () => void;
+  onProfileClick: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ isBusinessMode, onToggleAi }) => {
+const Header: React.FC<HeaderProps> = ({ isBusinessMode, onToggleAi, onProfileClick }) => {
   return (
     <header className="sticky top-0 z-40 bg-black/80 backdrop-blur-md px-6 py-5 flex items-center justify-between border-b border-[#B7CC16]/20">
       <div className="flex items-center gap-3">
@@ -29,9 +30,12 @@ const Header: React.FC<HeaderProps> = ({ isBusinessMode, onToggleAi }) => {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M13 10V3L4 14h7v7l9-11h-7z" />
           </svg>
         </button>
-        <div className="w-11 h-11 bg-[#121212] rounded-2xl flex items-center justify-center border border-white/10 overflow-hidden shadow-xl">
+        <button 
+          onClick={onProfileClick}
+          className="w-11 h-11 bg-[#121212] rounded-2xl flex items-center justify-center border border-white/10 overflow-hidden shadow-xl active:scale-90 transition-transform"
+        >
           <img src="https://picsum.photos/seed/user/100/100" alt="Avatar" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all" />
-        </div>
+        </button>
       </div>
     </header>
   );

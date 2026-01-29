@@ -6,21 +6,29 @@ import Dashboard from './components/Dashboard';
 import WalletsView from './components/WalletsView';
 import CardsView from './components/CardsView';
 import TransferView from './components/TransferView';
-import SendMoneyView from './components/InternationalTransferView'; // Reusing the same file for logical SendMoneyView
+import SendMoneyView from './components/InternationalTransferView';
 import BusinessView from './components/BusinessView';
 import BottomNav from './components/BottomNav';
 import Header from './components/Header';
 import AiAssistant from './components/AiAssistant';
 import SplashScreen from './components/SplashScreen';
+import ProfileView from './components/ProfileView';
 
 const App: React.FC = () => {
   const [isInitializing, setIsInitializing] = useState(true);
-  const [activeTab, setActiveTab] = useState<'home' | 'wallets' | 'send' | 'convert' | 'cards' | 'business'>('home');
+  const [activeTab, setActiveTab] = useState<'home' | 'wallets' | 'send' | 'convert' | 'cards' | 'business' | 'profile'>('home');
   const [wallets, setWallets] = useState<Wallet[]>(INITIAL_WALLETS);
   const [transactions, setTransactions] = useState<Transaction[]>(INITIAL_TRANSACTIONS);
   const [cards, setCards] = useState<VirtualCard[]>(INITIAL_CARDS);
   const [isBusinessMode, setIsBusinessMode] = useState(false);
   const [showAi, setShowAi] = useState(false);
+
+  const [userProfile, setUserProfile] = useState({
+    name: 'Chukwudi Adebayo',
+    email: 'c.adebayo@zerah.io',
+    tier: 'Platinum Elite',
+    isPremium: true
+  });
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -76,6 +84,8 @@ const App: React.FC = () => {
         return <CardsView cards={cards} />;
       case 'business':
         return <BusinessView isBusinessMode={isBusinessMode} setIsBusinessMode={setIsBusinessMode} />;
+      case 'profile':
+        return <ProfileView user={userProfile} onLogout={() => window.location.reload()} />;
       default:
         return <Dashboard wallets={wallets} transactions={transactions} onAction={(tab) => setActiveTab(tab as any)} />;
     }
@@ -90,6 +100,7 @@ const App: React.FC = () => {
       <Header 
         isBusinessMode={isBusinessMode} 
         onToggleAi={() => setShowAi(!showAi)} 
+        onProfileClick={() => setActiveTab('profile')}
       />
       
       <main className="flex-1 px-4 py-6 overflow-y-auto">
@@ -98,7 +109,7 @@ const App: React.FC = () => {
 
       {showAi && <AiAssistant onClose={() => setShowAi(false)} transactions={transactions} />}
 
-      <BottomNav activeTab={activeTab === 'send' || activeTab === 'convert' ? 'transfer' : activeTab} setActiveTab={setActiveTab} />
+      <BottomNav activeTab={activeTab === 'send' || activeTab === 'convert' ? 'send' : activeTab} setActiveTab={setActiveTab} />
     </div>
   );
 };
